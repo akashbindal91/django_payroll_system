@@ -43,6 +43,4 @@ class Salary(models.Model):
 
     def save(self, *args, **kwargs):
         self.total = (self.basic + self.da + self.hra + self.ea + self.pa)
-
-
         super(Salary, self).save(*args, **kwargs)
