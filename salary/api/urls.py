@@ -20,4 +20,8 @@ from salary.api import views
 
 urlpatterns = [
     path('list/', views.SalaryListView, name='api-salary-list'),
+    path('list/<pk>', views.SalaryDetail, name='api-salary-detail'),
+    path('add/', views.SalaryCreate, name='api-salary-add'),
+    path('edit/<pk>', views.SalaryUpdate, name='api-salary-update'),
+    path('delete/<pk>', views.SalaryDelete, name='api-salary-Delete'),
 ]
