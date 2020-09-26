@@ -36,7 +36,7 @@ class Salary(models.Model):
     pa = models.DecimalField(
         max_digits=15, decimal_places=2, null=False, blank=False, validators=[validate_fields])
     total = models.DecimalField(
-        max_digits=15, decimal_places=2, null=False, blank=False, validators=[validate_fields])
+        max_digits=15, decimal_places=2)
 
     def __str__(self):
         return self.code
