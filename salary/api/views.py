@@ -4,13 +4,26 @@ from salary.models import Salary
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from payroll import settings
+from rest_framework.pagination import PageNumberPagination
+
+# from salary.api import pagination
+# from django.conf import settings
 
 
 @api_view(['GET', ])
 def SalaryListView(request):
+    # salary = Salary.objects.all()
+    # serializer = serializers.SalarySerializer(salary, many=True)
+    # response = Response(data=serializer.data, status=status.HTTP_200_OK)
+    # return response
+
+    # use of pagination
+    paginator = PageNumberPagination()
     salary = Salary.objects.all()
-    serializer = serializers.SalarySerializer(salary, many=True)
-    return Response(serializer.data)
+    context = paginator.paginate_queryset(salary, request)
+    serializer = serializers.SalarySerializer(context, many=True)
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(['GET', ])
@@ -18,7 +31,7 @@ def SalaryDetail(request, pk):
     try:
         snippet = Salary.objects.get(pk=pk)
     except Salary.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND )
 
     serializer = serializers.SalarySerializer(snippet)
     return Response(serializer.data)
