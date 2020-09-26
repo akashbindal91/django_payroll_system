@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block content %}
+<h1>Salary Structure</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Basic</th>
+      <th>HRA</th>
+      <th>DA</th>
+      <th>EA</th>
+      <th>PA</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for value in object_list %}
+    <tr>
+      <td>{{ value.code }}</td>
+      <td>{{ value.basic }}</td>
+      <td>{{ value.hra }}</td>
+      <td>{{ value.da }}</td>
+      <td>{{ value.ea }}</td>
+      <td>{{ value.pa }}</td>
+      <td>{{ value.total }}</td>
+      <td>
+        <input type='button' class='btn btn-warning'  name='Edit' value='Edit'></input>
+        <input type='button' class='btn btn-danger'  name='Delete' value='Delete'></input>
+        <input type='button' class='btn btn-primary'  name='Save' value='Save'></input>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

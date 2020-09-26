@@ -16,12 +16,8 @@ Including another URLconf
 
 from django.urls import path
 from salary import views
-from salary.api import views as api_views
+from salary.api import views
 
 urlpatterns = [
-    path('list/', views.SalaryListView.as_view(), name='salary-list'),
-    path('create/', views.create, name='salary_create'),
-    path('update/', views.update, name='salary_update'),
-    path('delete/', views.delete, name='salary_delete'),
-
+    path('list/', views.SalaryListView, name='api-salary-list'),
 ]
