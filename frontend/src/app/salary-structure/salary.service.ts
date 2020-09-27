@@ -30,7 +30,7 @@ export class SalaryService {
         baseUrl = baseUrl + params.search_key;
       }
     }
-    return this.http.get<SalaryStructure>(baseUrl);
+    return this.http.get<any>(baseUrl);
   }
 
   delete(item: { code: any; }) {
@@ -42,7 +42,7 @@ export class SalaryService {
   }
 
   create(params: { getRawValue: () => any; }) {
-    return this.http.post(`${environment.apiUrl}/salary/add/`, (params.getRawValue()));
+    return this.http.post<any>(`${environment.apiUrl}/salary/add/`, (params.getRawValue()));
   }
 
   update(params: { search_key?: string; data?: any; getRawValue?: any; }) {

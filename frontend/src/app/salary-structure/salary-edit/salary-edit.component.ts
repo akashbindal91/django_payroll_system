@@ -89,7 +89,10 @@ export class SalaryEditComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     let totalVal = (parseFloat(this.basic.value) + parseFloat(this.hra.value) + parseFloat(this.pa.value) + parseFloat(this.ea.value) + parseFloat(this.da.value)).toFixed(2);
 
-    this.total.value = isNaN(parseFloat(totalVal)) ? 0.00 : totalVal ;
+    this.myform.setValue({
+      total: isNaN(parseFloat(totalVal)) ? 0.00 : totalVal
+    });
+    // (this.total).value = isNaN(parseFloat(totalVal)) ? 0.00 : totalVal ;
     // tslint:disable-next-line: max-line-length
   }
 

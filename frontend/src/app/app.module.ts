@@ -13,6 +13,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { AlertModule } from 'ngx-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // AlertModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
