@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // import { AlertModule } from 'ngx-bootstrap';
+import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -33,6 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     // AlertModule.forRoot(),
+    NgbModule,
+    NgbAlertModule
   ],
   providers: [],
   bootstrap: [AppComponent]
