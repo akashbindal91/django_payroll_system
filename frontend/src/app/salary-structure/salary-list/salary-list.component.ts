@@ -48,7 +48,7 @@ export class SalaryListComponent implements OnInit {
   deleteStructure(item: any) {
     if ('code' in item) {
       this.salaryService.delete(item).subscribe((response: any) => {
-        this.raise_success(`structure with code${item.code}has been successfully deleted`);
+        this.raise_success(`structure with code ${item.code} has been successfully deleted`);
         this.salaryStructureRequest();
       });
     } else {
