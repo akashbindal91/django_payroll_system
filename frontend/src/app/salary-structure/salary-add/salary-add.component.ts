@@ -1,6 +1,8 @@
 import { SalaryService } from './../salary.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ServicesService } from '@app/shared/services.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-salary-add',
   templateUrl: './salary-add.component.html',
@@ -16,7 +18,7 @@ export class SalaryAddComponent implements OnInit {
   da: FormControl;
   total: FormControl;
 
-  constructor(private salaryService: SalaryService) {
+  constructor(private salaryService: SalaryService, private servicesService: ServicesService, private router: Router) {
 
   }
 
@@ -57,9 +59,12 @@ export class SalaryAddComponent implements OnInit {
       this.salaryService.create(this.myform)
         .subscribe(response => {
           console.log(response);
+          this.raise_success(`${this.code.value} has been successfully created`);
+          this.router.navigate(['/']);
         });
 
     } else {
+      this.raise_error(`some issue regarding submission of structure code ${this.code.value}`);
       console.log('Form not Submitted!');
     }
   }
@@ -71,6 +76,16 @@ export class SalaryAddComponent implements OnInit {
     this.myform.setValue({
       total: isNaN(parseFloat(totalVal)) ? 0.00 : totalVal
     });
+  }
+
+  raise_error(message) {
+    this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
+  }
+  raise_success(message) {
+    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 3000 });
+  }
+  raise_warning(message) {
+    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 8000 });
   }
 
 }

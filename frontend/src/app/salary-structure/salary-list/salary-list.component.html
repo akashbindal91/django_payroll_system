@@ -2,7 +2,7 @@
   <h4>
     Structure List
   </h4>
-
+  <!-- <button class="btn btn-primary"  (click)="clickMe()">Click Me</button> -->
   <table class="table" *ngIf='(salaryStructure.data).length>0' >
     <thead>
       <tr>
@@ -35,3 +35,5 @@
   <pagination-controls (pageChange)="pagenumber = $event; pageChanged() "></pagination-controls>
 
 </div>
+
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesService } from '@app/shared/services.service';
 import { SalaryService } from '../salary.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class SalaryListComponent implements OnInit {
   totalPages: number;
   totalItems: number;
 
-  constructor(private salaryService: SalaryService) {
+  constructor(private salaryService: SalaryService, private servicesService: ServicesService) {
     this.pagenumber = 1;
     this.itemsPerPage = undefined;
     this.totalPages = 3;
@@ -47,10 +48,21 @@ export class SalaryListComponent implements OnInit {
   deleteStructure(item: any) {
     if ('code' in item) {
       this.salaryService.delete(item).subscribe((response: any) => {
+        this.raise_success(`structure with code${item.code}has been successfully deleted`);
         this.salaryStructureRequest();
       });
     } else {
-      return false;
+      this.raise_error(`Some issue occured while deleting code of ${item.code}. PLease try again.`);
     }
+  }
+
+  raise_error(message) {
+    this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
+  }
+  raise_success(message) {
+    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 3000 });
+  }
+  raise_warning(message) {
+    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 8000 });
   }
 }

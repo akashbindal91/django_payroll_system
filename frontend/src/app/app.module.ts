@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // import { AlertModule } from 'ngx-bootstrap';
 import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     SalaryAddComponent,
     SalaryEditComponent,
     SalaryListComponent,
-    HeaderComponent
+    HeaderComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

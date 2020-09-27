@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { SalaryService } from '../salary.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ServicesService } from '@app/shared/services.service';
 
 @Component({
   selector: 'app-salary-edit',
@@ -22,7 +23,7 @@ export class SalaryEditComponent implements OnInit {
   formDetails: any;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private salaryService: SalaryService) {
+  constructor(private route: ActivatedRoute, private router: Router, private salaryService: SalaryService, private servicesService: ServicesService) {
     this.searchCode = this.route.snapshot.paramMap.get('code');
   }
 
@@ -70,18 +71,20 @@ export class SalaryEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.myform);
     if (this.myform.valid) {
 
       console.log('Form Submitted!');
 
-      this.salaryService.update( {search_key : this.searchCode  , data : this.myform})
+      this.salaryService.update({ search_key: this.searchCode, data: this.myform })
         .subscribe(response => {
           console.log(response);
+          this.raise_success(`${this.searchCode} has been successfully updated`);
+          this.router.navigate(['/']);
+
         });
 
     } else {
-      console.log('Form not Submitted!');
+      this.raise_warning(`some issue regarding submission of structure code ${this.searchCode}`);
     }
   }
 
@@ -94,6 +97,16 @@ export class SalaryEditComponent implements OnInit {
     });
     // (this.total).value = isNaN(parseFloat(totalVal)) ? 0.00 : totalVal ;
     // tslint:disable-next-line: max-line-length
+  }
+
+  raise_error(message) {
+    this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
+  }
+  raise_success(message) {
+    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 3000 });
+  }
+  raise_warning(message) {
+    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 8000 });
   }
 
 
