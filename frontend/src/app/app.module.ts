@@ -8,8 +8,7 @@ import { SalaryEditComponent } from './salary-structure/salary-edit/salary-edit.
 import { SalaryListComponent } from './salary-structure/salary-list/salary-list.component';
 import { HeaderComponent } from './component/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -26,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    // NgbModule
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

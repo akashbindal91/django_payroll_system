@@ -1,1 +1,37 @@
-<p>salary-list works!</p>
+<div style="text-align:center">
+  <h4>
+    Basic Pagination
+  </h4>
+
+  <table class="table" *ngIf='(salaryStructure.data).length>0' >
+    <thead>
+      <tr>
+        <th scope="col">CODE</th>
+        <th scope="col">BASIC</th>
+        <th scope="col">HRA</th>
+        <th scope="col">DA</th>
+        <th scope="col">EA</th>
+        <th scope="col">PA</th>
+        <th scope="col">TOTAL</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of salaryStructure.data | paginate: { itemsPerPage: this.itemsPerPage, currentPage: pagenumber, totalItems: totalItems }">
+        <th scope="row">{{item.code}}</th>
+        <td scope="row">{{item.basic}}</td>
+        <td scope="row">{{item.hra}}</td>
+        <td scope="row">{{item.da}}</td>
+        <td scope="row">{{item.ea}}</td>
+        <td scope="row">{{item.pa}}</td>
+        <td scope="row">{{item.total}}</td>
+        <td scope="row">
+          <a class="btn btn-warning" routerLink="edit">Edit</a>
+          <a class="btn btn-danger" (click)="deleteStructure(item)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pagenumber = $event; pageChanged() "></pagination-controls>
+
+</div>

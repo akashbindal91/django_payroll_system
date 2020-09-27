@@ -8,15 +8,50 @@ import { SalaryService } from '../salary.service';
 })
 export class SalaryListComponent implements OnInit {
 
-  constructor(private salaryService: SalaryService) { }
+  salaryStructure: any;
+  config: any;
+  pagenumber: number;
+  itemsPerPage: number;
+  totalPages: number;
+  totalItems: number;
+
+  constructor(private salaryService: SalaryService) {
+    this.pagenumber = 1;
+    this.itemsPerPage = undefined;
+    this.totalPages = 3;
+    this.salaryStructure = { data: [] };
+    this.salaryStructureRequest();
+  }
 
   ngOnInit(): void {
-    // tslint:disable-next-line: deprecation
-    this.salaryService.getAll().subscribe(response => {
-      console.log(response);
-      // this.loading = false;
-      // this.users = users;
+  }
+
+  pageChanged() {
+    this.salaryStructureRequest();
+  }
+
+  salaryStructureRequest() {
+    this.salaryService.getAll({ page: this.pagenumber }).subscribe(response => {
+      if ('results' in response) {
+        this.salaryStructure.data = response.results;
+      }
+
+      if ('count' in response) {
+        this.itemsPerPage = this.itemsPerPage ? this.itemsPerPage : (this.salaryStructure.data).length;
+        this.totalItems = response.count;
+        this.totalPages = this.totalItems / this.itemsPerPage;
+      }
     });
   }
 
+  deleteStructure(item: any) {
+    if ('code' in item) {
+      this.salaryService.delete(item)
+        .subscribe((response: any) => {
+          console.log(response);
+        });
+    } else {
+      return false;
+    }
+  }
 }
