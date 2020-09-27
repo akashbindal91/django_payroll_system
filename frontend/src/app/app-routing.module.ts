@@ -9,7 +9,7 @@ import { SalaryListComponent } from './salary-structure/salary-list/salary-list.
 const routes: Routes = [
   // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: '', component: SalaryListComponent },
-  { path: 'edit', component: SalaryEditComponent },
+  { path: 'edit/:code', component: SalaryEditComponent },
   { path: 'add', component: SalaryAddComponent },
 
   // otherwise redirect to home

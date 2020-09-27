@@ -11,12 +11,26 @@ export class SalaryService {
 
   getAll(params: { page: any; }) {
     let extraParams = '';
+    const baseUrl = `${environment.apiUrl}/salary/list/`;
     if (params) {
+
       if ('page' in params) {
         extraParams = '?page=' + params.page;
       }
+
     }
-    return this.http.get<SalaryStructure>(`${environment.apiUrl}/salary/list/` + extraParams);
+    return this.http.get<SalaryStructure>(baseUrl + extraParams);
+  }
+
+  getStructureDetails(params: { search_key: string; }) {
+    let baseUrl = `${environment.apiUrl}/salary/list/`;
+    if (params) {
+
+      if ('search_key' in params) {
+        baseUrl = baseUrl + params.search_key;
+      }
+    }
+    return this.http.get<SalaryStructure>(baseUrl);
   }
 
   delete(item: { code: any; }) {
@@ -31,7 +45,11 @@ export class SalaryService {
     return this.http.post(`${environment.apiUrl}/salary/add/`, (params.getRawValue()));
   }
 
-  update(params: { getRawValue: () => any; }) {
-    return this.http.post(`${environment.apiUrl}/salary/add/`, (params.getRawValue()));
+  update(params: { search_key?: string; data?: any; getRawValue?: any; }) {
+    let baseUrl = `${environment.apiUrl}/salary/edit/`;
+    baseUrl += params.search_key;
+
+
+    return this.http.put(baseUrl, ((params.data).getRawValue()));
   }
 }

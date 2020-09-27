@@ -26,7 +26,7 @@
         <td scope="row">{{item.pa}}</td>
         <td scope="row">{{item.total}}</td>
         <td scope="row">
-          <a class="btn btn-warning" routerLink="edit/{{item.code}}">Edit</a>
+          <a class="btn btn-warning" [routerLink]="['edit/', item.code]">Edit</a>
           <a class="btn btn-danger" (click)="deleteStructure(item)">Delete</a>
         </td>
       </tr>

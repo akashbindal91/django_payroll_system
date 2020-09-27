@@ -1,7 +1,6 @@
 import { SalaryService } from './../salary.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-salary-add',
   templateUrl: './salary-add.component.html',
@@ -53,7 +52,7 @@ export class SalaryAddComponent implements OnInit {
     console.log(this.myform);
     if (this.myform.valid) {
 
-      console.log("Form Submitted!");
+      console.log('Form Submitted!');
 
       this.salaryService.create(this.myform)
         .subscribe(response => {
@@ -61,13 +60,13 @@ export class SalaryAddComponent implements OnInit {
         });
 
     } else {
-      console.log("Form not Submitted!");
+      console.log('Form not Submitted!');
     }
   }
 
   autoAddTotal() {
     // tslint:disable-next-line: max-line-length
-    var totalVal = (parseFloat(this.basic.value) + parseFloat(this.hra.value) + parseFloat(this.pa.value) + parseFloat(this.ea.value) + parseFloat(this.da.value)).toFixed(2);
+    let totalVal = (parseFloat(this.basic.value) + parseFloat(this.hra.value) + parseFloat(this.pa.value) + parseFloat(this.ea.value) + parseFloat(this.da.value)).toFixed(2);
 
     this.total.value = isNaN(parseFloat(totalVal)) ? 0.00 : totalVal ;
     // tslint:disable-next-line: max-line-length

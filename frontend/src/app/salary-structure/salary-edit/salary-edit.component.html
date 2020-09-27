@@ -1,45 +1,47 @@
 <div class="container">
   <br>
-  <form action="" method="POST">
+  <H1>Edit STRUCTURE</H1>
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="myform">
 
     <div class="row">
       <div class="col">
-        <label for="code" class="">Code:</label>
-        <input type="text" class="form-control " placeholder="Enter code" id="code">
+        <label for="code" class="">CODE:</label>
+        <input required type="text" class="form-control" placeholder="Enter code" id="code" formControlName="code">
       </div>
     </div>
     <div class="row">
       <div class="col">
         <label for="basic" class="">BASIC:</label>
-        <input type="text" class="form-control " placeholder="Enter basic" id="basic">
+        <input required type="number" step=".01" min="0" value="0" class="form-control" placeholder="Enter basic" id="basic" formControlName="basic" (blur)="autoAddTotal()" >
       </div>
       <div class="col">
-        <label for="hra" class="">Hra:</label>
-        <input type="text" class="form-control " placeholder="Enter hra" id="hra">
+        <label for="hra" class="">HRA:</label>
+        <input required type="number" step=".01" min="0" value="0" class="form-control" placeholder="Enter hra" id="hra" formControlName="hra"  (blur)="autoAddTotal()">
       </div>
     </div>
     <div class="row">
       <div class="col">
         <label for="da" class="">DA:</label>
-        <input type="text" class="form-control " placeholder="Enter da" id="da">
+        <input required type="number" step=".01" min="0" value="0" class="form-control" placeholder="Enter da" id="da" formControlName="da"  (blur)="autoAddTotal()">
       </div>
       <div class="col">
         <label for="pa" class="">PA:</label>
-        <input type="text" class="form-control " placeholder="Enter pa" id="pa">
+        <input required type="number" step=".01" min="0" value="0" class="form-control" placeholder="Enter pa" id="pa" formControlName="pa"  (blur)="autoAddTotal()">
       </div>
     </div>
     <div class="row">
       <div class="col">
         <label for="ea" class="">EA:</label>
-        <input type="text" class="form-control " placeholder="Enter ea" id="ea">
+        <input required type="number" step=".01" min="0" value="0" class="form-control" placeholder="Enter ea" id="ea" formControlName="ea"  (blur)="autoAddTotal()">
       </div>
       <div class="col">
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <label for="total" class="">TOTAL:</label>
-        <input type="text" class="form-control " placeholder="Enter total" id="total">
+        <label for="total" class="">TOTAL:</label> {{total.value}}
+        <input type="hidden" class="form-control" value="0" placeholder="Enter total" id="total"
+          formControlName="total">
       </div>
       <div class="col">
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
