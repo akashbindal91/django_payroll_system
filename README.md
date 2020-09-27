@@ -21,5 +21,5 @@ angular 9
 # frontend steps to follow
 1. npm install
 2. cd frontend/src/
-2. npm serve
+3. npm serve
 
