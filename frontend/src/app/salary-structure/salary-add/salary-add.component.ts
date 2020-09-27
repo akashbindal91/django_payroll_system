@@ -61,6 +61,8 @@ export class SalaryAddComponent implements OnInit {
           console.log(response);
           this.raise_success(`${this.code.value} has been successfully created`);
           this.router.navigate(['/']);
+        }, (error: any) => {
+          return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
         });
 
     } else {

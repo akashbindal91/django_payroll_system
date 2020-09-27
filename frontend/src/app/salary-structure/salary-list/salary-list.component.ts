@@ -18,8 +18,8 @@ export class SalaryListComponent implements OnInit {
 
   constructor(private salaryService: SalaryService, private servicesService: ServicesService) {
     this.pagenumber = 1;
-    this.itemsPerPage = undefined;
-    this.totalPages = 3;
+    this.itemsPerPage = 5;
+    this.totalPages = 1;
     this.salaryStructure = { data: [] };
     this.salaryStructureRequest();
   }
@@ -32,24 +32,32 @@ export class SalaryListComponent implements OnInit {
   }
 
   salaryStructureRequest() {
+    console.log('here');
     this.salaryService.getAll({ page: this.pagenumber }).subscribe(response => {
-      if ('results' in response) {
-        this.salaryStructure.data = response.results;
-      }
-
       if ('count' in response) {
+        if (response.count < 1) {
+          return this.raise_warning('No data is available. create one and then try again.')
+        }
         this.itemsPerPage = this.itemsPerPage ? this.itemsPerPage : (this.salaryStructure.data).length;
         this.totalItems = response.count;
         this.totalPages = this.totalItems / this.itemsPerPage;
       }
+      if ('results' in response) {
+        this.salaryStructure.data = response.results;
+      }
+    }, (error: any) => {
+      return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
     });
   }
 
   deleteStructure(item: any) {
     if ('code' in item) {
       this.salaryService.delete(item).subscribe((response: any) => {
+        console.log(response);
         this.raise_success(`structure with code ${item.code} has been successfully deleted`);
         this.salaryStructureRequest();
+      }, (error: any) => {
+        return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
       });
     } else {
       this.raise_error(`Some issue occured while deleting code of ${item.code}. PLease try again.`);

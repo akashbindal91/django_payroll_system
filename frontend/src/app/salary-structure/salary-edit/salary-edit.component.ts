@@ -81,6 +81,8 @@ export class SalaryEditComponent implements OnInit {
           this.raise_success(`${this.searchCode} has been successfully updated`);
           this.router.navigate(['/']);
 
+        }, (error: any) => {
+          return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
         });
 
     } else {
