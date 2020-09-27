@@ -2,8 +2,8 @@
 # django_payroll_system
 
 # backend
-django 2.2
-djangorestframework 3.11.1
+1. django 2.2
+2. djangorestframework 3.11.1
 
 # backend steps to follow
 1. pip install -r requirements.txt
