@@ -9,7 +9,7 @@ export class SalaryService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(params) {
+  getAll(params: { page: any; }) {
     let extraParams = '';
     if (params) {
       if ('page' in params) {
@@ -19,15 +19,19 @@ export class SalaryService {
     return this.http.get<SalaryStructure>(`${environment.apiUrl}/salary/list/` + extraParams);
   }
 
-  delete(item) {
-    let searchKey;
+  delete(item: { code: any; }) {
+    let searchKey: string;
     if ('code' in item) {
       searchKey = item.code;
-    } else {
-      return false;
     }
     return this.http.delete(`${environment.apiUrl}/salary/delete/` + searchKey);
   }
 
+  create(params: { getRawValue: () => any; }) {
+    return this.http.post(`${environment.apiUrl}/salary/add/`, (params.getRawValue()));
+  }
 
+  update(params: { getRawValue: () => any; }) {
+    return this.http.post(`${environment.apiUrl}/salary/add/`, (params.getRawValue()));
+  }
 }
