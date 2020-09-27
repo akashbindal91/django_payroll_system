@@ -1,6 +1,9 @@
 
 # django_payroll_system
 
+# python version
+python 3.6
+
 # backend
 1. django 2.2
 2. djangorestframework 3.11.1
