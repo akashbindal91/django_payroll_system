@@ -32,10 +32,10 @@ export class SalaryListComponent implements OnInit {
   }
 
   salaryStructureRequest() {
-    console.log('here');
     this.salaryService.getAll({ page: this.pagenumber }).subscribe(response => {
       if ('count' in response) {
         if (response.count < 1) {
+          this.salaryStructure.data = [];
           return this.raise_warning('No data is available. create one and then try again.')
         }
         this.itemsPerPage = this.itemsPerPage ? this.itemsPerPage : (this.salaryStructure.data).length;
@@ -53,10 +53,10 @@ export class SalaryListComponent implements OnInit {
   deleteStructure(item: any) {
     if ('code' in item) {
       this.salaryService.delete(item).subscribe((response: any) => {
-        console.log(response);
         this.raise_success(`structure with code ${item.code} has been successfully deleted`);
         this.salaryStructureRequest();
       }, (error: any) => {
+        this.salaryStructureRequest();
         return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
       });
     } else {
@@ -68,9 +68,9 @@ export class SalaryListComponent implements OnInit {
     this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
   }
   raise_success(message) {
-    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 3000 });
+    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 2000 });
   }
   raise_warning(message) {
-    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 8000 });
+    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 3000 });
   }
 }

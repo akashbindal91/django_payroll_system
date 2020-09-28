@@ -58,7 +58,7 @@ export class SalaryEditComponent implements OnInit {
   getStructureDetails() {
     this.salaryService.getStructureDetails({ search_key: this.searchCode })
       .subscribe(response => {
-        this.myform.setValue({
+        this.myform.patchValue({
           code: response.code,
           basic: response.basic,
           hra: response.hra,
@@ -72,12 +72,8 @@ export class SalaryEditComponent implements OnInit {
 
   onSubmit() {
     if (this.myform.valid) {
-
-      console.log('Form Submitted!');
-
       this.salaryService.update({ search_key: this.searchCode, data: this.myform })
         .subscribe(response => {
-          console.log(response);
           this.raise_success(`${this.searchCode} has been successfully updated`);
           this.router.navigate(['/']);
 
@@ -94,7 +90,7 @@ export class SalaryEditComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     let totalVal = (parseFloat(this.basic.value) + parseFloat(this.hra.value) + parseFloat(this.pa.value) + parseFloat(this.ea.value) + parseFloat(this.da.value)).toFixed(2);
 
-    this.myform.setValue({
+    this.myform.patchValue({
       total: isNaN(parseFloat(totalVal)) ? 0.00 : totalVal
     });
     // (this.total).value = isNaN(parseFloat(totalVal)) ? 0.00 : totalVal ;
@@ -105,10 +101,10 @@ export class SalaryEditComponent implements OnInit {
     this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
   }
   raise_success(message) {
-    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 3000 });
+    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 2000 });
   }
   raise_warning(message) {
-    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 8000 });
+    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 3000 });
   }
 
 

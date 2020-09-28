@@ -9,7 +9,8 @@ def index(request):
     """
     docstring
     """
-    return render(request, 'base.html', {})
+    # return render(request, 'base.html', {})
+    return render(request, 'index.html', {})
     # return HttpResponse('welcomr yo the jungle')
 
 def signup_view(request):

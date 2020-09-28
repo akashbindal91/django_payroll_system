@@ -51,14 +51,9 @@ export class SalaryAddComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.myform);
     if (this.myform.valid) {
-
-      console.log('Form Submitted!');
-
       this.salaryService.create(this.myform)
         .subscribe(response => {
-          console.log(response);
           this.raise_success(`${this.code.value} has been successfully created`);
           this.router.navigate(['/']);
         }, (error: any) => {
@@ -67,7 +62,6 @@ export class SalaryAddComponent implements OnInit {
 
     } else {
       this.raise_error(`some issue regarding submission of structure code ${this.code.value}`);
-      console.log('Form not Submitted!');
     }
   }
 
@@ -75,7 +69,7 @@ export class SalaryAddComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     let totalVal = (parseFloat(this.basic.value) + parseFloat(this.hra.value) + parseFloat(this.pa.value) + parseFloat(this.ea.value) + parseFloat(this.da.value)).toFixed(2);
 
-    this.myform.setValue({
+    this.myform.patchValue({
       total: isNaN(parseFloat(totalVal)) ? 0.00 : totalVal
     });
   }
@@ -84,10 +78,10 @@ export class SalaryAddComponent implements OnInit {
     this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
   }
   raise_success(message) {
-    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 3000 });
+    this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 2000 });
   }
   raise_warning(message) {
-    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 8000 });
+    this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 3000 });
   }
 
 }

@@ -11,11 +11,9 @@ export class ServicesService {
   private subject = new Subject<any>();
 
   sendClickEvent(param) {
-    console.log('sendClickEvent', param);
     this.subject.next(param);
   }
   getClickEvent(): Observable<any> {
-    console.log('getClickEvent');
     return this.subject.asObservable();
   }
 }
