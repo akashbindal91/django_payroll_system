@@ -15,6 +15,8 @@ python 3.6
 4. python manage.py createsuperuser
 5. python manage.py runserver
 
+NOTE:- As of now the the Angular Frontend is already integrated into django ie no need to run ng serve command. Just run django server and explore. If you want to look into the front end part, only then go to frontend steps below. 
+
 # database
 sqlite3
 
