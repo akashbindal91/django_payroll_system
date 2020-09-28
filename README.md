@@ -26,3 +26,8 @@ angular 9
 2. cd frontend/src/
 3. ng serve
 
+# for loading angular view from django use below steps
+1. ng build --prod --output-path ~/projects/python3/django2.2/payroll_youtility/payroll/accounts/static/ --output-hashing none
+2. copy index.html and replace it with accounts/templates/index.html
+3. load js files and update them with {% static 'runtime-es2015.js' %} instead of 'runtime-es2015.js'
+4. run django server
