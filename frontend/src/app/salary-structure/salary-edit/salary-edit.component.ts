@@ -78,7 +78,11 @@ export class SalaryEditComponent implements OnInit {
           this.router.navigate(['/']);
 
         }, (error: any) => {
-          return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
+          if ('error' in error && 'code' in (error.error)) {
+            return this.raise_error(error.error.code[0]);
+          } else {
+            return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
+          }
         });
 
     } else {

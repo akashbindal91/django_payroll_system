@@ -28,13 +28,13 @@ export class SalaryAddComponent implements OnInit {
   }
 
   createFormControls() {
-    this.code = new FormControl('', Validators.required);
-    this.basic = new FormControl('', [Validators.required]);
-    this.hra = new FormControl('', Validators.required);
-    this.pa = new FormControl('', Validators.required);
-    this.ea = new FormControl('', Validators.required);
-    this.da = new FormControl('', Validators.required);
-    this.total = new FormControl('');
+    this.code = new FormControl(null, Validators.required);
+    this.basic = new FormControl(null, [Validators.required]);
+    this.hra = new FormControl(null, Validators.required);
+    this.pa = new FormControl(null, Validators.required);
+    this.ea = new FormControl(null, Validators.required);
+    this.da = new FormControl(null, Validators.required);
+    this.total = new FormControl(null);
   }
 
   createForm() {
@@ -57,11 +57,14 @@ export class SalaryAddComponent implements OnInit {
           this.raise_success(`${this.code.value} has been successfully created`);
           this.router.navigate(['/']);
         }, (error: any) => {
-          return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
+          if (('error' in error) && ('code' in (error.error))) {
+            return this.raise_error(error.error.code[0]);
+          } else {
+            return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
+          }
         });
-
     } else {
-      this.raise_error(`some issue regarding submission of structure code ${this.code.value}`);
+      this.raise_error(`There might be some missing values. submission of structure code \'${this.code.value}\'`);
     }
   }
 

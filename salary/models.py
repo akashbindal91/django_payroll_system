@@ -42,5 +42,6 @@ class Salary(models.Model):
         return self.code
 
     def save(self, *args, **kwargs):
+        self.code = self.code.lower()
         self.total = (self.basic + self.da + self.hra + self.ea + self.pa)
         super(Salary, self).save(*args, **kwargs)
