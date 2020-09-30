@@ -36,7 +36,7 @@ export class SalaryListComponent implements OnInit {
       if ('count' in response) {
         if (response.count < 1) {
           this.salaryStructure.data = [];
-          return this.raise_warning('No data is available. create one and then try again.')
+          return this.raise_warning('No data is available. create one and then try again.');
         }
         this.itemsPerPage = this.itemsPerPage ? this.itemsPerPage : (this.salaryStructure.data).length;
         this.totalItems = response.count;
@@ -68,13 +68,13 @@ export class SalaryListComponent implements OnInit {
     }
   }
 
-  raise_error(message) {
+  raise_error(message: string) {
     this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
   }
-  raise_success(message) {
+  raise_success(message: string) {
     this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 2000 });
   }
-  raise_warning(message) {
+  raise_warning(message: string) {
     this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 3000 });
   }
 }
