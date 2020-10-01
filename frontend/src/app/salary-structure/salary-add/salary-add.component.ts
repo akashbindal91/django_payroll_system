@@ -59,6 +59,8 @@ export class SalaryAddComponent implements OnInit {
         }, (error: any) => {
           if (('error' in error) && ('code' in (error.error))) {
             return this.raise_error(error.error.code[0]);
+          } else if ('error' in error) {
+            for (const key in error.error) { return this.raise_error('for ' + key.toUpperCase()  + ' : ' + error.error[key][0]); }
           } else {
             return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
           }
@@ -70,20 +72,20 @@ export class SalaryAddComponent implements OnInit {
 
   autoAddTotal() {
     // tslint:disable-next-line: max-line-length
-    let totalVal = (parseFloat(this.basic.value) + parseFloat(this.hra.value) + parseFloat(this.pa.value) + parseFloat(this.ea.value) + parseFloat(this.da.value)).toFixed(2);
+    const totalVal = (parseFloat(this.basic.value) + parseFloat(this.hra.value) + parseFloat(this.pa.value) + parseFloat(this.ea.value) + parseFloat(this.da.value)).toFixed(2);
 
     this.myform.patchValue({
       total: isNaN(parseFloat(totalVal)) ? 0.00 : totalVal
     });
   }
 
-  raise_error(message) {
+  raise_error(message: string) {
     this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
   }
-  raise_success(message) {
+  raise_success(message: string) {
     this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 2000 });
   }
-  raise_warning(message) {
+  raise_warning(message: string) {
     this.servicesService.sendClickEvent({ type: 'warning', msg: message, time: 3000 });
   }
 
