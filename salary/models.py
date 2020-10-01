@@ -8,7 +8,7 @@ def validate_fields(value):
     """
     docstring
     """
-    if value < 1:
+    if value < 0.01:
         raise ValidationError(
             ('Amount must be greator then 0.'), params={'value': value},)
 

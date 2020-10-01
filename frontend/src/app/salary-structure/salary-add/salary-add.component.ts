@@ -59,6 +59,8 @@ export class SalaryAddComponent implements OnInit {
         }, (error: any) => {
           if (('error' in error) && ('code' in (error.error))) {
             return this.raise_error(error.error.code[0]);
+          } else if ('error' in error) {
+            for (const key in error.error) { return this.raise_error('for ' + key.toUpperCase()  + ' : ' + error.error[key][0]); }
           } else {
             return this.raise_warning('Either Data is not available or there is some issue from server. Try after some time..');
           }
