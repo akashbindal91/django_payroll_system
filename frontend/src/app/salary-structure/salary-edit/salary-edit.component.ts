@@ -107,7 +107,7 @@ export class SalaryEditComponent implements OnInit {
   }
 
   raise_error(message: any) {
-    this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 10000 });
+    this.servicesService.sendClickEvent({ type: 'danger', msg: message, time: 5000 });
   }
   raise_success(message: string) {
     this.servicesService.sendClickEvent({ type: 'success', msg: message, time: 2000 });

@@ -14,6 +14,7 @@ export class AlertComponent implements OnInit {
   staticAlertClosed = false;
   successMessage = '';
   type = 'success';
+  duration = 0;
   clickEventsubscription: Subscription;
 
 
@@ -21,6 +22,7 @@ export class AlertComponent implements OnInit {
     this.clickEventsubscription = this.servicesService.getClickEvent().subscribe((param) => {
       this.type = param.type;
       this.successMessage = param.msg;
+      this.duration = param.time;
       this.alertMessage();
     });
 
@@ -28,7 +30,7 @@ export class AlertComponent implements OnInit {
 
 
   ngOnInit(): void {
-    setTimeout(() => this.staticAlertClosed = true, 10000);
+    setTimeout(() => this.staticAlertClosed = true, this.duration);
 
     this._success.subscribe(message => {
       return this.successMessage = message;
@@ -38,7 +40,7 @@ export class AlertComponent implements OnInit {
 
   public alertMessage() {
     this._success.pipe(
-      debounceTime(10000)
+      debounceTime(this.duration)
     ).subscribe(() => this.successMessage = '');
     this._success.next(this.successMessage);
 
